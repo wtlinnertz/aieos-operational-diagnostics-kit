@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "summary": "PMR-NOTIF-001 passes all 6 hard gates; INR-NOTIF-001 confirmed Frozen with SEV2 severity and 68-minute duration in clock time, timeline is chronological with date-and-time timestamps covering first signal through restoration with mitigation identifiable, root cause identifies primary cause with 3 contributing factors and systemic assessment, SLO impact quantified with time and percentage and remaining budget, 4 corrective actions each with named individual owner and specific target date and tracking reference, and 3 specific traceable lessons learned.",
+  "hard_gates": {
+    "incident_reference": "PASS",
+    "timeline": "PASS",
+    "root_cause": "PASS",
+    "slo_impact": "PASS",
+    "corrective_actions": "PASS",
+    "lessons_learned": "PASS"
+  },
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "description": "The SLO impact note acknowledges uncertainty in the calculation ('actual consumption may be lower') and uses incident window duration as a conservative proxy. This is appropriately disclosed but teams with minute-level SLI data should calculate the exact success rate below threshold rather than using the duration proxy.",
+      "location": "§5 SLO Impact — note below table"
+    },
+    {
+      "description": "Open question from INR §7 (why 17-day latency between bug introduction and incident) is addressed in §4 Primary Root Cause ('required specific combination of high notification volume and concurrent timeout events') but not explicitly resolved. This is acceptable — the PMR acknowledges the uncertainty rather than fabricating a definitive answer.",
+      "location": "§4 Root Cause Analysis — Primary Root Cause"
+    }
+  ],
+  "completeness_score": "97"
+}
