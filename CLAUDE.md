@@ -80,7 +80,7 @@ Cross-kit outputs: PMR → RRK (next RHR), EEK (corrective actions), PIK (recurr
 
 ## Boundary Contracts
 
-- **Upstream:** Incident evidence (alerts, monitoring data, responder notes) + frozen SRP from RRK (service baseline, SLO targets) + optionally frozen RR §7 from REK (recent changes) + optionally frozen SAD from EEK (service architecture).
+- **Upstream:** Incident evidence (alerts, monitoring data, responder notes) + frozen SRP from RRK (service baseline, SLO targets) + optionally frozen RR §7 from REK (recent changes) + optionally frozen SAD from EEK (service architecture). See `docs/entry-from-rrk.md` for the boundary briefing.
 - **Downstream:** Produces frozen PMRs consumed by the next RRK RHR, and optionally frozen RBs for reuse in future incidents. PMR corrective actions may create EEK work items or PIK discovery intake context.
 
 ## Relationship to RRK Incident Records
@@ -108,7 +108,10 @@ These are complementary, not overlapping. The IR and PMR cover different questio
 - Read the playbook (`docs/playbook.md`) for the full process definition
 - Read the governance model (`docs/governance-model.md`) for structural rules
 - Check `docs/how-to-use-with-ai.md` for session setup instructions
+- Use `docs/session-setup.md` for per-artifact setup checklists and pre-flight gate checks
+- Use `docs/troubleshooting.md` when a validator returns FAIL — maps each gate failure to a specific remediation
 - Reference `examples/basic-operation/` for a complete worked example
+- Arriving from RRK on a SEV1/2 trigger: see `docs/entry-from-rrk.md` for the boundary briefing
 
 ## Building or Auditing AIEOS Kits
 

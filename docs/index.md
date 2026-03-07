@@ -91,6 +91,16 @@ Codified resolution procedure for a known failure class. Optional; versioned.
 
 ---
 
+## Guides
+
+| Document | Purpose |
+|----------|---------|
+| `session-setup.md` | Per-artifact setup checklists, pre-flight gate checks, and common failure reminders |
+| `troubleshooting.md` | Gate failure remediation guide |
+| `entry-from-rrk.md` | Boundary briefing when arriving from the Reliability & Resilience Kit (SEV1/2 trigger) |
+
+---
+
 ## Tests
 
 `tests/kit-test-plan.md` — S-01 through S-08 structural checks + F-00 (SEV2 investigation) + F-01 (runbook generation)
