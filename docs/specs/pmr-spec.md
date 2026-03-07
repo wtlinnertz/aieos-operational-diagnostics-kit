@@ -4,6 +4,14 @@ The Postmortem Record (PMR) is the post-resolution root cause analysis artifact.
 
 ---
 
+## What This Artifact Is Not
+
+- **Not an incident summary.** The PMR is an organizational learning artifact authored after resolution is confirmed. It is not a real-time status update or incident summary written during the incident.
+- **Not a blame document.** The PMR focuses on systemic causes and structural improvements — not individual actions or performance. "A team member made an error" is not root cause; the system condition that made the error possible is.
+- **Not an Investigation Record.** The INR documents how the team investigated; the PMR synthesizes those findings into root cause, SLO impact, and corrective action. The INR is an input to the PMR, not a substitute for it.
+
+---
+
 ## Purpose
 
 The PMR serves three roles:

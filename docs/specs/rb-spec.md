@@ -4,6 +4,14 @@ The Runbook (RB) is a codified resolution procedure for a known failure class. I
 
 ---
 
+## What This Artifact Is Not
+
+- **Not a standard operating procedure or general operations guide.** The RB codifies what actually worked in a real incident for a specific, identified failure class — it is not a comprehensive operations manual.
+- **Not a design document.** The RB describes the resolution procedure for a known failure; architectural improvements that prevent the failure class belong in the PMR corrective actions and downstream EEK work.
+- **Not a substitute for the PMR.** The RB is generated from a frozen PMR; it does not replace or summarize the PMR. Both serve different roles: the PMR explains why and what was learned; the RB provides how to resolve the next occurrence.
+
+---
+
 ## Purpose
 
 The RB serves three roles:

@@ -6,6 +6,14 @@ This is a **boundary contract** and an **entry gate**, not a generated artifact.
 
 ---
 
+## What This Artifact Is Not
+
+- **Not an incident ticket or alert.** The DCR is a structured context record that gates diagnostic investigation — not a monitoring alert or helpdesk ticket. It requires deliberate human authoring to confirm sufficient context exists.
+- **Not an investigation record.** The DCR confirms context exists; the INR documents the investigation itself. Hypotheses, diagnostic steps, and conclusions belong in the INR.
+- **Not a postmortem.** The DCR captures the initial state at investigation start. Organizational learning and root cause analysis belong in the PMR.
+
+---
+
 ## Purpose
 
 The DCR serves two roles:

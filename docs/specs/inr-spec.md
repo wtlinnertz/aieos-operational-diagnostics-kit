@@ -4,6 +4,14 @@ The Investigation Record (INR) is the active diagnostic trail artifact produced 
 
 ---
 
+## What This Artifact Is Not
+
+- **Not a postmortem.** The INR documents how the team investigated — the hypotheses, diagnostic steps, and evidence gathered. Analysis of systemic causes, organizational learning, and corrective action plans belong in the PMR.
+- **Not a resolution record.** The INR documents the investigation trail through probable cause; resolution execution and post-resolution verification belong in the PMR.
+- **Not a substitute for evidence.** The INR must reference concrete evidence (log excerpts, metric values, system outputs) for each conclusion. Assertions without evidence references are not acceptable.
+
+---
+
 ## Purpose
 
 The INR serves three roles:
