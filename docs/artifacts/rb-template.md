@@ -12,6 +12,8 @@
 | Status | Draft / Validated / Frozen |
 | Governance Model Version | 1.0 |
 | Prompt Version | {version of rb-prompt.md used} |
+| Spec Version | {spec version} |
+| Principles Version | {principles file versions} |
 
 ---
 

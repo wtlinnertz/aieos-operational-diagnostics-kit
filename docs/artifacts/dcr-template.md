@@ -13,6 +13,8 @@
 | Status | Draft / Validated / Frozen |
 | Governance Model Version | 1.0 |
 | Prompt Version | N/A |
+| Spec Version | {spec version} |
+| Principles Version | {principles file versions} |
 
 ---
 

@@ -1,5 +1,7 @@
 # Runbook — Specification
 
+Version: v1.0
+
 The Runbook (RB) is a codified resolution procedure for a known failure class. It is generated when a Postmortem Record identifies a repeatable failure pattern with a documented resolution. The RB is versioned and reused in future incidents of the same class to reduce mean time to resolution.
 
 ---

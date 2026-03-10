@@ -1,5 +1,7 @@
 # Investigation Record — Specification
 
+Version: v1.0
+
 The Investigation Record (INR) is the active diagnostic trail artifact produced during or immediately after a structured investigation. It documents the hypotheses considered, evidence gathered, diagnostic steps taken, and the probable cause conclusion. It is the organizational record of how the team figured out what was wrong.
 
 ---

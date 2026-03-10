@@ -1,5 +1,7 @@
 # Postmortem Record — Specification
 
+Version: v1.0
+
 The Postmortem Record (PMR) is the post-resolution root cause analysis artifact. It is authored after the incident is resolved and the investigation is complete. It synthesizes the investigation findings into an authoritative organizational learning record: timeline, root cause, SLO impact, corrective actions, and lessons learned.
 
 ---

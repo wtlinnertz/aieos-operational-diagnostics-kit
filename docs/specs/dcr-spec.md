@@ -1,5 +1,7 @@
 # Diagnostic Context Record — Specification
 
+Version: v1.0
+
 The Diagnostic Context Record (DCR) is the entry gate for the Operational Diagnostics Kit. It must be completed before the Investigation Record can be generated. It validates that enough context exists to begin structured diagnosis: the service is identified, symptoms are described specifically, scope is bounded, at least one observable signal is documented, and recent changes are accounted for.
 
 This is a **boundary contract** and an **entry gate**, not a generated artifact. The DCR is human-authored. It is validated against this spec before INR generation begins.
