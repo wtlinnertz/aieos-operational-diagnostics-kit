@@ -119,6 +119,7 @@ Kit repositories follow the pattern: `aieos-{layer-name}-kit`
 | Security & Compliance | `aieos-security-compliance-kit` |
 | Data & Configuration | `aieos-data-configuration-kit` |
 | Platform & Infrastructure | `aieos-platform-infrastructure-kit` |
+| Documentation & Knowledge | `aieos-documentation-knowledge-kit` |
 
 ### Artifact ID Format
 
