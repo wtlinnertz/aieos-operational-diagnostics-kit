@@ -114,6 +114,11 @@ Kit repositories follow the pattern: `aieos-{layer-name}-kit`
 | Release & Exposure | `aieos-release-exposure-kit` |
 | Reliability & Resilience | `aieos-reliability-resilience-kit` |
 | Insight & Evolution | `aieos-insight-evolution-kit` |
+| Operational Diagnostics | `aieos-operational-diagnostics-kit` |
+| Quality Assurance | `aieos-quality-assurance-kit` |
+| Security & Compliance | `aieos-security-compliance-kit` |
+| Data & Configuration | `aieos-data-configuration-kit` |
+| Platform & Infrastructure | `aieos-platform-infrastructure-kit` |
 
 ### Artifact ID Format
 
@@ -185,10 +190,12 @@ All validators across all kits produce JSON with this schema:
 
 ### Artifact Provenance
 
-Every artifact template must include two provenance fields in its Document Control section:
+Every artifact template must include these provenance fields in its Document Control section:
 
 - `Governance Model Version` — The version of this governance model in effect when the artifact was generated. Retrieve from §15 of this document. Current value: `1.0`.
 - `Prompt Version` — The version of the generation prompt used to produce this artifact. Retrieve from the prompt file's version header. Use `N/A` for human-authored entry gates and intake forms.
+- `Spec Version` — The version of the spec file that was active when the artifact was generated and validated. Retrieve from the spec file's `Version:` header. This allows retrospective assessment of which rules were in effect at generation time.
+- `Principles Version` — The version(s) of the principles file(s) used as input during generation. List each file and its version (e.g., `security-principles v1.0, product-discovery-principles v1.0`). Use `N/A` if no principles files were used.
 
 These fields are required for all artifacts generated after this governance model version. Existing frozen artifacts are grandfathered — no retrofitting required. Provenance tracking is forward-looking only.
 
@@ -305,6 +312,12 @@ Principles feed into the kit's context files (ACF, DCF, or kit-specific equivale
 ### Principle File Versioning
 
 Every principle file must carry a version field in its header. Changes to principle files follow a categorized versioning protocol (minor, significant, breaking) defined in `aieos-governance-foundation/docs/principle-file-standard.md`. That document is the authoritative reference for version field format, change categories, and the enforcement mapping requirement.
+
+### Spec File Versioning
+
+Every spec file must carry a version field in its header (`Version: v1.0`). Specs define the hard gates and content rules that determine artifact compliance — changes to specs directly affect whether validators produce correct judgments. Changes to spec files follow the same categorized versioning protocol (minor, significant, breaking) as principle files. The authoritative reference is `aieos-governance-foundation/docs/spec-file-standard.md`.
+
+Generated artifacts must record the spec version active at generation time in their Document Control section (see §Artifact Provenance above). This enables retrospective assessment: when a spec changes, it is possible to identify which frozen artifacts were validated under the old rules.
 
 ---
 
