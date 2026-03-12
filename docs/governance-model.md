@@ -65,6 +65,8 @@ aieos-{layer-name}-kit/
     artifacts/       # Templates and intake forms
     prompts/         # AI generation prompts
     validators/      # Quality gate definitions
+    tools/           # Tool capability definitions (optional; four-file sets)
+    bindings/        # Implementation mappings for tool-agnostic concepts (optional)
     playbook.md      # End-to-end process definition for this kit
     index.md         # Documentation entry point
     how-to-adapt.md  # Organizational adoption guidance
@@ -84,6 +86,8 @@ aieos-{layer-name}-kit/
 | `artifacts/` | Structural templates and human intake forms | Content rules or quality criteria |
 | `prompts/` | AI behavior instructions for generation and utility tasks | Inline rules (must reference specs) |
 | `validators/` | Evaluation procedures and judgment criteria | Suggestions, redesign, or scope expansion |
+| `tools/` | Tool four-file sets (spec, template, prompt, validator) defining abstract capabilities | Implementation details (those go in bindings) |
+| `bindings/` | Implementation mappings from abstract concepts to specific tools/environments | Policy, rules, or constraints (those go in specs or tool specs) |
 
 ---
 
@@ -109,7 +113,7 @@ Kit repositories follow the pattern: `aieos-{layer-name}-kit`
 |-------|----------------|
 | Strategic Direction | `aieos-strategic-direction-kit` |
 | Product Intelligence | `aieos-product-intelligence-kit` |
-| Flow Control | `aieos-flow-control-kit` |
+| Solution Sourcing | `aieos-solution-sourcing-kit` |
 | Engineering Execution | `aieos-engineering-execution-kit` |
 | Release & Exposure | `aieos-release-exposure-kit` |
 | Reliability & Resilience | `aieos-reliability-resilience-kit` |
@@ -193,7 +197,7 @@ All validators across all kits produce JSON with this schema:
 
 Every artifact template must include these provenance fields in its Document Control section:
 
-- `Governance Model Version` — The version of this governance model in effect when the artifact was generated. Retrieve from §15 of this document. Current value: `1.0`.
+- `Governance Model Version` — The version of this governance model in effect when the artifact was generated. Retrieve from §15 of this document. Current value: `1.2`.
 - `Prompt Version` — The version of the generation prompt used to produce this artifact. Retrieve from the prompt file's version header. Use `N/A` for human-authored entry gates and intake forms.
 - `Spec Version` — The version of the spec file that was active when the artifact was generated and validated. Retrieve from the spec file's `Version:` header. This allows retrospective assessment of which rules were in effect at generation time.
 - `Principles Version` — The version(s) of the principles file(s) used as input during generation. List each file and its version (e.g., `security-principles v1.0, product-discovery-principles v1.0`). Use `N/A` if no principles files were used.
@@ -434,13 +438,67 @@ Bindings are not governed artifacts — they have no spec, validator, or prompt.
 
 ---
 
+## 12a. Tool Governance
+
+### What Tools Are
+
+Tools are named, reusable capabilities that AI agents or human operators invoke during artifact production. A tool defines an abstract capability — what it does, when to use it, and how to judge correct usage. Tools are governed by the four-file system, following the same separation of concerns as artifacts.
+
+### How Tools Differ from Artifacts
+
+Artifacts are **documents** that progress through a lifecycle (Draft → Validated → Frozen). Tools are **capabilities** that are invoked during that lifecycle. The four-file system answers the same four questions for both, but the semantics differ:
+
+| File | Artifact Meaning | Tool Meaning |
+|------|-----------------|--------------|
+| Spec | Content rules and hard gates for the document | Preconditions, postconditions, constraints, and hard gates for the capability |
+| Template | Document structure (sections, placeholders) | Output structure (what the tool produces when invoked) |
+| Prompt | AI generation instructions (how to produce the document) | AI invocation instructions (when/why to invoke the capability) |
+| Validator | Pass/fail judgment on the document | Pass/fail judgment on whether the tool was used correctly |
+
+### Directory and Naming
+
+Tool four-file sets live in `docs/tools/` within each kit. All four files are co-located in the same directory:
+
+```
+docs/tools/
+  {tool-name}-spec.md
+  {tool-name}-template.md
+  {tool-name}-prompt.md
+  {tool-name}-validator.md
+```
+
+Tool names use lowercase kebab-case and describe capabilities (e.g., `dependency-check`, `spec-lookup`), not artifact types. Tool IDs follow the format `TOOL-{TOOL-NAME}` (e.g., `TOOL-DEPENDENCY-CHECK`).
+
+The `docs/tools/` directory is optional. When present, four-file completeness is enforced.
+
+### Shared vs. Kit-Specific
+
+- **Shared tools** live in `aieos-governance-foundation/docs/tools/`. These are cross-kit capabilities used across multiple layers.
+- **Kit-specific tools** live in the respective kit's `docs/tools/`.
+
+### Relationship to Bindings
+
+Tools follow the same policy-vs-implementation separation defined in §12. The four-file set is policy (abstract capability). The binding is implementation (concrete execution). Tool bindings live in `docs/bindings/` alongside other bindings, using the naming pattern `{tool-name}-{environment}.md`.
+
+The four-file set never references a specific implementation. When the implementation environment changes, only bindings are updated.
+
+### Versioning
+
+Tool specs follow the same versioning protocol as artifact specs (see `spec-file-standard.md`).
+
+### Full Specification
+
+The complete rules for tool governance — including hard gates for tool spec compliance, validator output format, and cross-reference rules — are defined in `aieos-governance-foundation/docs/tool-governance-spec.md`.
+
+---
+
 ## 13. Kit Invariants
 
 The following rules apply to every kit in the AIEOS system. Violating these breaks the system's guarantees.
 
 ### Structural Invariants
 
-1. **Four-file completeness** — Every artifact type has exactly four files: spec, template, prompt, validator.
+1. **Four-file completeness** — Every artifact type has exactly four files: spec, template, prompt, validator. Every tool type (when present in `docs/tools/`) also has exactly four files following the same pattern.
 2. **Specs are the single source of truth** — Prompts and validators reference specs. Rules are never inlined.
 3. **Validators are hard gates** — Ambiguity is failure. Validators do not help, suggest, or redesign.
 4. **Non-goals are enforceable** — Validators block violations. Scope expansion is not permitted.
@@ -505,7 +563,7 @@ Each kit is versioned independently using semantic versioning:
 
 This document is versioned as part of the `aieos-governance-foundation` repository. The canonical version lives at `aieos-governance-foundation/governance-model.md`. All kit copies must remain synchronized with that file.
 
-Current version: `1.0`
+Current version: `1.2`
 
 ### Change Protocol
 
