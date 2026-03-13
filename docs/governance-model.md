@@ -124,6 +124,7 @@ Kit repositories follow the pattern: `aieos-{layer-name}-kit`
 | Data & Configuration | `aieos-data-configuration-kit` |
 | Platform & Infrastructure | `aieos-platform-infrastructure-kit` |
 | Documentation & Knowledge | `aieos-documentation-knowledge-kit` |
+| Peer Review | `aieos-peer-review-kit` |
 
 ### Artifact ID Format
 
@@ -197,7 +198,7 @@ All validators across all kits produce JSON with this schema:
 
 Every artifact template must include these provenance fields in its Document Control section:
 
-- `Governance Model Version` — The version of this governance model in effect when the artifact was generated. Retrieve from §15 of this document. Current value: `1.2`.
+- `Governance Model Version` — The version of this governance model in effect when the artifact was generated. Retrieve from §15 of this document. Current value: `1.5`.
 - `Prompt Version` — The version of the generation prompt used to produce this artifact. Retrieve from the prompt file's version header. Use `N/A` for human-authored entry gates and intake forms.
 - `Spec Version` — The version of the spec file that was active when the artifact was generated and validated. Retrieve from the spec file's `Version:` header. This allows retrospective assessment of which rules were in effect at generation time.
 - `Principles Version` — The version(s) of the principles file(s) used as input during generation. List each file and its version (e.g., `security-principles v1.0, product-discovery-principles v1.0`). Use `N/A` if no principles files were used.
@@ -248,6 +249,19 @@ A frozen artifact may be corrected in place without re-validation when **all** o
 **Procedure:** Make the correction and add an Amendment Log entry to the artifact's Document Control section (date, what changed, materiality criterion cited, authorized by). No re-validation is required.
 
 **If there is any ambiguity** about whether a change is non-material, it is material. The amendment path must not become a workaround for the re-entry protocol. Material changes trigger the Re-Entry Protocol.
+
+### Convergence Loops
+
+When an artifact fails validation, a bounded correction loop may run autonomously before escalating to a human. The correction loop re-invokes the generation prompt with the validator's blocking issues as additional constraints, re-validates in a separate session, and repeats until all hard gates pass or the iteration limit is reached.
+
+- **Max 3 iterations** — every convergence loop is hard-limited to 3 correction-validation cycles.
+- **Session separation** — correction and validation always run in separate AI sessions.
+- **Validators remain strict** — validators produce PASS/FAIL findings only; they do not guide correction.
+- **Escalation on failure to converge** — if the loop does not converge within 3 iterations, a structured escalation report is delivered to a human.
+
+The canonical specification for convergence loops — including validator convergence (Pattern A) and PRK review convergence (Pattern B) — is defined in [`review-convergence-loop.md`](docs/review-convergence-loop.md).
+
+EEK Phase 3's iteration rules (max 3 fix attempts, staleness detection, structured failure feedback) are a specific instance of this general pattern applied to code execution.
 
 ### Re-Entry Protocol
 
@@ -482,6 +496,8 @@ Tools follow the same policy-vs-implementation separation defined in §12. The f
 
 The four-file set never references a specific implementation. When the implementation environment changes, only bindings are updated.
 
+The integration model extends to a third layer — **adapters** — when tool capabilities need to execute against external APIs. See §12b for adapter governance.
+
 ### Versioning
 
 Tool specs follow the same versioning protocol as artifact specs (see `spec-file-standard.md`).
@@ -489,6 +505,45 @@ Tool specs follow the same versioning protocol as artifact specs (see `spec-file
 ### Full Specification
 
 The complete rules for tool governance — including hard gates for tool spec compliance, validator output format, and cross-reference rules — are defined in `aieos-governance-foundation/docs/tool-governance-spec.md`.
+
+---
+
+## 12b. Adapter Conformance
+
+### The Third Integration Layer
+
+When AIEOS tools need to execute against external systems (publishing artifacts to a wiki, syncing work items to a tracker), the integration follows a three-layer model:
+
+1. **Tool Spec** (abstract capability) — governed by the four-file system in `docs/tools/`
+2. **Binding** (field mapping) — static mapping document in `docs/bindings/`
+3. **Adapter** (executable implementation) — code that implements the binding against a concrete API
+
+Adapter code lives **outside** AIEOS kits. AIEOS defines the interface contract; the consuming project or a dedicated adapter repository owns the implementation.
+
+### Interface Contract
+
+Every adapter must implement a subset of three operations based on its declared directionality:
+- `push(payload) → result` — sends content to the external system
+- `verify(id) → status` — confirms a resource exists in the external system
+- `health() → ok | degraded | down` — reports connectivity status
+
+### Hard Gates
+
+Adapters must satisfy these conformance gates (verified by the consuming project's test suite):
+
+| Gate | Rule |
+|------|------|
+| `idempotency_implemented` | Repeated calls produce same outcome |
+| `auth_externalized` | No credentials in AIEOS files |
+| `error_handling_defined` | Retry, circuit breaker, degraded mode implemented |
+| `audit_logging_implemented` | Every operation produces structured log |
+| `directionality_declared` | Push-only, pull-only, or bidirectional declared |
+| `health_check_implemented` | Health check returns ok/degraded/down |
+| `payload_format_compliant` | Accepts input conforming to integration tool's template |
+
+### Full Specification
+
+The complete rules for adapter conformance — including idempotency, authentication, error handling, audit logging, and directionality requirements — are defined in `aieos-governance-foundation/docs/adapter-conformance-spec.md`.
 
 ---
 
@@ -509,12 +564,14 @@ The following rules apply to every kit in the AIEOS system. Violating these brea
 6. **Separate generation and validation** — Different AI sessions to prevent self-validation bias.
 7. **Human in the loop** — Every freeze requires human approval. AI does not self-approve.
 8. **Impact before re-entry** — Changes to frozen artifacts require impact analysis first.
+8a. **Bounded correction loops** — When autonomous correction is used (per [`review-convergence-loop.md`](docs/review-convergence-loop.md)), iteration is bounded (max 3 attempts), each correction runs in a fresh session, and validation runs in a separate session. Failure to converge escalates to a human.
 
 ### Quality Invariants
 
 9. **No silent modification** — Do not change existing constraints without explicit acknowledgment.
 10. **No scope expansion** — Downstream artifacts may not introduce scope that upstream artifacts do not define.
 11. **No inferred information** — If information is missing, mark it explicitly. Do not fill gaps with assumptions.
+12. **Adapter separation** — Adapter code never lives inside AIEOS kits. AIEOS defines the interface contract (via `adapter-conformance-spec.md`); the consuming project or a dedicated adapter repository owns the implementation.
 
 ---
 
@@ -563,7 +620,7 @@ Each kit is versioned independently using semantic versioning:
 
 This document is versioned as part of the `aieos-governance-foundation` repository. The canonical version lives at `aieos-governance-foundation/governance-model.md`. All kit copies must remain synchronized with that file.
 
-Current version: `1.2`
+Current version: `1.4`
 
 ### Change Protocol
 
