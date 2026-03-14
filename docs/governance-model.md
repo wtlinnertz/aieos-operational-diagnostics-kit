@@ -125,6 +125,7 @@ Kit repositories follow the pattern: `aieos-{layer-name}-kit`
 | Platform & Infrastructure | `aieos-platform-infrastructure-kit` |
 | Documentation & Knowledge | `aieos-documentation-knowledge-kit` |
 | Peer Review | `aieos-peer-review-kit` |
+| Business Process | `aieos-business-process-kit` |
 
 ### Artifact ID Format
 
@@ -198,7 +199,7 @@ All validators across all kits produce JSON with this schema:
 
 Every artifact template must include these provenance fields in its Document Control section:
 
-- `Governance Model Version` — The version of this governance model in effect when the artifact was generated. Retrieve from §15 of this document. Current value: `1.5`.
+- `Governance Model Version` — The version of this governance model in effect when the artifact was generated. Retrieve from §15 of this document. Current value: `1.6`.
 - `Prompt Version` — The version of the generation prompt used to produce this artifact. Retrieve from the prompt file's version header. Use `N/A` for human-authored entry gates and intake forms.
 - `Spec Version` — The version of the spec file that was active when the artifact was generated and validated. Retrieve from the spec file's `Version:` header. This allows retrospective assessment of which rules were in effect at generation time.
 - `Principles Version` — The version(s) of the principles file(s) used as input during generation. List each file and its version (e.g., `security-principles v1.0, product-discovery-principles v1.0`). Use `N/A` if no principles files were used.
@@ -620,7 +621,7 @@ Each kit is versioned independently using semantic versioning:
 
 This document is versioned as part of the `aieos-governance-foundation` repository. The canonical version lives at `aieos-governance-foundation/governance-model.md`. All kit copies must remain synchronized with that file.
 
-Current version: `1.4`
+Current version: `1.6`
 
 ### Change Protocol
 
