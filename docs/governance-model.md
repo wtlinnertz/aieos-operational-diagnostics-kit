@@ -554,7 +554,7 @@ The following rules apply to every kit in the AIEOS system. Violating these brea
 
 ### Structural Invariants
 
-1. **Four-file completeness** — Every artifact type has exactly four files: spec, template, prompt, validator. Every tool type (when present in `docs/tools/`) also has exactly four files following the same pattern.
+1. **Four-file completeness** — Every artifact type has exactly four files: spec, template, prompt, validator. Every tool type (when present in `docs/tools/`) also has exactly four files following the same pattern. **Entry gate exception:** Human-authored entry gates (e.g., RER, SRER, QAER, DCR) require spec, template, and validator only. No generation prompt is needed as these artifacts are completed by human operators during intake. The four-file rule applies in full to AI-generated artifact types.
 2. **Specs are the single source of truth** — Prompts and validators reference specs. Rules are never inlined.
 3. **Validators are hard gates** — Ambiguity is failure. Validators do not help, suggest, or redesign.
 4. **Non-goals are enforceable** — Validators block violations. Scope expansion is not permitted.
