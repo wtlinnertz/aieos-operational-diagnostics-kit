@@ -31,7 +31,7 @@ This kit produces four governed artifact types in sequence:
 3. **Postmortem Record (PMR)** — Post-resolution RCA. Contributing factors, SLO impact, corrective actions, lessons learned. Generated. ID format: `PMR-{SERVICE}-{NNN}`.
 4. **Runbook (RB)** — Codified resolution procedure for a known failure class. Generated, versioned, optional. ID format: `RB-{SERVICE}-{NNN}`.
 
-Each artifact type has exactly four governing files: spec, template, prompt, validator.
+Each artifact type has exactly four governing files: spec, template, prompt, validator. The exception is DCR: as a human-authored entry gate, it does not have a generation prompt (per governance model entry gate exception FW-049). DCR has three governing files (spec, template, validator).
 
 Note: DCR is human-authored (no AI generation session) — consistent with the SRER/RER/KER entry gate pattern.
 
