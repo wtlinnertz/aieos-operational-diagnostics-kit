@@ -627,10 +627,12 @@ Current version: `1.6`
 
 Changes to the governance model require:
 1. Update `aieos-governance-foundation/governance-model.md` first.
-2. Impact analysis across all kits that reference it.
-3. Review by kit maintainers.
-4. Update all kit copies of `docs/governance-model.md` to match exactly.
-5. Migration guidance for breaking changes.
+2. Update `governance_model_version` in `kit-manifest.yml` to match.
+3. Impact analysis across all kits that reference it.
+4. Review by kit maintainers.
+5. Update all kit copies of `docs/governance-model.md` to match exactly.
+6. Run `TOOL-KIT-SYNC-AUDIT` (scope: `sync-files-only`) to verify all copies match.
+7. Migration guidance for breaking changes.
 
 ---
 
