@@ -1,6 +1,6 @@
 # How to Use This Kit with AI
 
-This guide explains how to set up AI sessions for each step in the Operational Diagnostics Kit workflow. Follow the session setup instructions precisely — incorrect session setup is the most common cause of poor artifact quality.
+This guide explains how to set up AI sessions for each step in the Operational Diagnostics Kit workflow. Follow the session setup instructions precisely. Incorrect session setup is the most common cause of poor artifact quality.
 
 ---
 
@@ -8,15 +8,14 @@ This guide explains how to set up AI sessions for each step in the Operational D
 
 **One artifact per session.** Do not generate multiple artifacts in the same session.
 
-**Separate generation and validation.** Always validate in a new session. Never ask the AI that generated an artifact to validate it — this produces self-validation bias.
+**Separate generation and validation.** Always validate in a new session. Never ask the AI that generated an artifact to validate it. This produces self-validation bias.
 
 **Include full frozen documents.** Do not summarize upstream artifacts. Provide the complete document.
 
 **DCR is human-authored.** Do not use AI to complete the DCR. Complete the template yourself from the Incident Intake Form.
 
----
 
-## DCR — Human-Authored (No AI Generation Session)
+## DCR. Human-Authored (No AI Generation Session)
 
 The DCR is human-authored. Do not use AI to complete it. Complete the template yourself using information from the incident evidence and the Incident Intake Form.
 
@@ -33,13 +32,12 @@ Do not suggest improvements. Judge only what is explicitly present.
 Output JSON using the format defined in docs/validators/dcr-validator.md."
 ```
 
----
 
-## INR — Generation Session
+## INR. Generation Session
 
 **Pre-generation utility prompts (run separately, before INR generation):**
 
-Pattern Match (optional — check for known failure signatures):
+Pattern Match (optional. Check for known failure signatures):
 ```
 Documents to provide:
 1. Completed DCR (full document)
@@ -52,7 +50,7 @@ Compare the current DCR against past PMRs and RBs for known failure signatures.
 Output using the format in the prompt."
 ```
 
-Hypothesis Generation (optional — seed the hypothesis register):
+Hypothesis Generation (optional. Seed the hypothesis register):
 ```
 Documents to provide:
 1. Completed DCR (full document)
@@ -67,7 +65,7 @@ Output structured hypothesis entries suitable for the INR §3 Hypothesis Registe
 ```
 Documents to provide:
 1. Frozen DCR (full document)
-2. Incident evidence (alert records, metric data, log excerpts, responder notes — everything gathered)
+2. Incident evidence (alert records, metric data, log excerpts, responder notes. Everything gathered)
 3. docs/specs/inr-spec.md
 4. docs/artifacts/inr-template.md
 5. Optional: Frozen SRP (full document)
@@ -83,7 +81,7 @@ Mark missing information with [MISSING: reason]. Output pure Markdown."
 
 **After generation:** Review the INR. Confirm:
 - The hypothesis register reflects all hypotheses actually considered, including those that were refuted
-- The diagnostic trail is chronologically accurate and findings are substantive (not "checked logs — nothing found")
+- The diagnostic trail is chronologically accurate and findings are substantive (not "checked logs, nothing found")
 - The probable cause is grounded in specific evidence references
 
 **If investigation stalls mid-incident, use the diagnostic checkpoint:**
@@ -112,9 +110,8 @@ Do not suggest improvements. Judge only what is explicitly present.
 Output JSON using the format defined in docs/validators/inr-validator.md."
 ```
 
----
 
-## PMR — Generation Session
+## PMR. Generation Session
 
 **Session setup:**
 ```
@@ -140,7 +137,7 @@ Mark missing information with [MISSING: reason]. Output pure Markdown."
 - Root cause analysis reflects what was actually learned, not initial speculation
 - Corrective actions have real owners, real deadlines, and real tracking references
 - SLO impact is calculated correctly against the SRP error budget
-- Lessons are specific — not "improve monitoring" but "monitoring was configured only at saturation, providing no lead time"
+- Lessons are specific, not "improve monitoring" but "monitoring was configured only at saturation, providing no lead time"
 - §8 Cross-Kit Actions accurately identifies whether EEK escalation, PIK re-engagement, or RB generation is warranted
 
 **Validation session setup:**
@@ -156,9 +153,8 @@ Do not suggest improvements. Judge only what is explicitly present.
 Output JSON using the format defined in docs/validators/pmr-validator.md."
 ```
 
----
 
-## RB — Generation Session
+## RB. Generation Session
 
 **Session setup:**
 ```
@@ -172,14 +168,14 @@ Documents to provide:
 Prompt:
 "Generate a Runbook for the failure class identified in this PMR.
 Follow the prompt in docs/prompts/rb-prompt.md.
-Use only documented resolution steps from the INR and PMR — do not invent procedures.
+Use only documented resolution steps from the INR and PMR. Do not invent procedures.
 Show commands where applicable. Include specific observable criteria for verification and escalation.
 Output pure Markdown."
 ```
 
 **After generation:** Review the RB. Confirm:
 - Trigger conditions are observable from monitoring without investigation
-- Resolution steps are specific enough to execute under pressure — any vague step is a failure
+- Resolution steps are specific enough to execute under pressure, any vague step is a failure
 - Commands are shown where applicable (not paraphrased)
 - Verification steps have specific observable criteria (not "monitor for stability")
 - Escalation conditions are observable and name an escalation target
@@ -197,7 +193,6 @@ Do not suggest improvements. Judge only what is explicitly present.
 Output JSON using the format defined in docs/validators/rb-validator.md."
 ```
 
----
 
 ## Utility Prompts
 
@@ -214,7 +209,6 @@ Compare the DCR service identification and symptoms against the SRP baseline.
 Output the consistency check assessment in the format defined in the prompt."
 ```
 
----
 
 ## Troubleshooting
 
@@ -225,7 +219,7 @@ The most common cause is findings stated as "nothing found" or "checked X" witho
 Check that actions have specific owners (not team names), specific dates (not "next sprint"), and actual tracking references (not "TBD"). Update the PMR directly for these fields.
 
 **Validator returns FAIL on lessons_learned**
-Generic lessons fail validation. Review the lessons against the root cause — each lesson should name a specific condition that existed and will now be changed. Regenerate with more specific post-incident review notes.
+Generic lessons fail validation. Review the lessons against the root cause. Each lesson should name a specific condition that existed and will now be changed. regenerate with more specific post-incident review notes.
 
 **RB trigger conditions are too vague**
 The generation session may have paraphrased alerts or metrics. Provide exact alert names and metric names from your monitoring system in the PMR or as supplementary evidence in the RB generation session.

@@ -1,10 +1,10 @@
-# Troubleshooting Guide — Operational Diagnostics Kit
+# Troubleshooting Guide: Operational Diagnostics Kit
 
 ## How to Use This Guide
 
 When a validator returns FAIL, find the failing gate in the table below. The Remediation column describes the specific fix required. Reopen the artifact, apply the remediation, and rerun the validator in a new session.
 
-**Do not embed fix attempts in your validation session.** Validators and generation are separate sessions.
+Validators and generation are separate sessions. Don't embed fix attempts in your validation session.
 
 ---
 
@@ -28,7 +28,7 @@ This is a human-completed entry gate artifact. Fill all fields directly in the t
 |------|------------------------|---------------|-------------|
 | context_reference | No DCR ID referenced | INR started without a DCR | Record the DCR ID in §1; if the DCR is missing, create and freeze one before continuing |
 | hypothesis_register | No hypotheses documented | Investigation conducted without tracking hypotheses | Document each hypothesis tested: what was suspected and what evidence would confirm or deny it |
-| diagnostic_trail | Steps recorded without findings ("Checked logs" with no observed outcome) | Actions logged without capturing what they revealed | Record what was found for each diagnostic step — not just what was checked |
+| diagnostic_trail | Steps recorded without findings ("Checked logs" with no observed outcome) | Actions logged without capturing what they revealed | Record what was found for each diagnostic step: not just what was checked |
 | probable_cause | Probable cause absent or stated as "unknown" | Investigation concluded without synthesizing findings | Synthesize findings into a probable cause statement; if evidence is insufficient, document what remains unknown and why further investigation is needed |
 | immediate_actions | Actions taken to contain or resolve the incident not recorded | Operational actions not documented during incident | Record each action with its timestamp, the actor who performed it, and the observed outcome |
 | open_questions | Open questions section absent | Investigation treated as fully resolved | List remaining unknowns that require further investigation or postmortem analysis; an empty section signals false closure |

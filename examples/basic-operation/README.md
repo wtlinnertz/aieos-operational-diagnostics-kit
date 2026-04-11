@@ -1,4 +1,4 @@
-# Worked Example: TaskFlow Notification Service — Queue Exhaustion Incident
+# Worked Example: TaskFlow Notification Service Queue Exhaustion Incident
 
 This directory contains a complete worked example of an ODK engagement for a SEV2 incident affecting the TaskFlow notification service. The incident was a notification queue exhaustion event caused by goroutine leak during context cancellation.
 
