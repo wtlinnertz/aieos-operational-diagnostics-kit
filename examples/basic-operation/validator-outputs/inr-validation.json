@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "summary": "INR-NOTIF-001 passes all 6 hard gates; DCR-NOTIF-001 confirmed Frozen, hypothesis register contains 3 hypotheses with all evidence fields (1 Confirmed, 2 Refuted), diagnostic trail has 9 chronologically ordered steps with date-and-time timestamps and substantive findings, probable cause stated with evidence reference, immediate actions documented with restoration confirmed at specific metrics, and open questions explicitly listed.",
+  "hard_gates": {
+    "context_reference": "PASS",
+    "hypothesis_register": "PASS",
+    "diagnostic_trail": "PASS",
+    "probable_cause": "PASS",
+    "immediate_actions": "PASS",
+    "open_questions": "PASS"
+  },
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "description": "Open question 1 (why did the 17-day latency occur) is noted but does not have a documented owner or resolution plan. This is appropriate for the INR — it is an open investigation question, not a corrective action. The PMR should address this gap in its root cause analysis.",
+      "location": "§7 Open Questions — item 1"
+    }
+  ],
+  "completeness_score": "99"
+}
