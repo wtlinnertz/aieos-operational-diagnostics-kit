@@ -284,8 +284,14 @@ Some AIEOS artifacts belong to the consuming project rather than to any single k
 - **ID format:** `ER-{INITIATIVE}-{NNN}`
 - **Governance:** Not governed by a four-file system. No generation prompt or validator. Operators maintain it by following each kit's playbook instructions.
 - **Retention:** Retained permanently. When an initiative ends, the ER status is updated to `Deprecated` or `Abandoned` (matching the terminal state of its governing artifacts). ERs are never deleted.
+- **Retroactive field:** The ER §1 Document Control section includes a `Retroactive` field. When `Yes`, at least some artifacts were generated retrospectively after work was complete. This signals to downstream consumers that artifacts describe existing state rather than design intent. See `engagement-record-spec.md §1` for the full field definition including artifact-phase granularity and rationale requirements.
 
 Project-level artifacts are not subject to the four-file completeness invariant (§13). They are operational records, not kit-governed artifacts.
+
+**Kit section completeness:** Each kit section in the ER must include a closing completeness status:
+- Kit section complete: Yes — all artifacts frozen; section reflects final state
+- Kit section complete: No — in progress; final artifact: {artifact-type} is {status}
+- Kit section complete: Not adopted — explicitly declined; reason documented above
 
 ---
 
@@ -554,7 +560,7 @@ The following rules apply to every kit in the AIEOS system. Violating these brea
 
 ### Structural invariants
 
-1. **Four-file completeness** — Every artifact type has exactly four files: spec, template, prompt, validator. Every tool type (when present in `docs/tools/`) also has exactly four files following the same pattern. **Entry gate exception:** Human-authored entry gates (e.g., RER, SRER, QAER, DCR) require spec, template, and validator only. No generation prompt is needed as these artifacts are completed by human operators during intake. The four-file rule applies in full to AI-generated artifact types.
+1. **Four-file completeness** — Every artifact type has exactly four files: spec, template, prompt, validator. Every tool type (when present in `docs/tools/`) also has exactly four files following the same pattern. **Entry gate exception:** Human-authored entry gates (e.g., RER, SRER, QAER, DCR) require spec, template, and validator only. No generation prompt is needed as these artifacts are completed by human operators during intake. The four-file rule applies in full to AI-generated artifact types. **IEK exception:** The Insight & Evolution Kit (Layer 7) has no human-authored entry gate artifact. IEK engagement is triggered objectively when ≥2 Reliability Health Reports are frozen for a service. Human judgment is exercised at the ES freeze decision, not at kit entry. ES §1 confirms frozen input status as the entry gate check. This exception is intentional — an additional human-authored gate would duplicate the trigger check without adding governance value.
 2. **Specs are the single source of truth** — Prompts and validators reference specs. Rules are never inlined.
 3. **Validators are hard gates** — Ambiguity is failure. Validators do not help, suggest, or redesign.
 4. **Non-goals are enforceable** — Validators block violations. Scope expansion is not permitted.
