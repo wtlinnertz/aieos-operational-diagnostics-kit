@@ -183,6 +183,8 @@ All validators across all kits produce JSON with this schema:
 - Validators evaluate only what is explicitly present. They do not infer, assume, or speculate.
 - Ambiguity in the artifact is a failure condition, not a judgment call.
 
+**Exception — PRK adversarial lens:** The adversarial lens validator in the Peer Review Kit inverts the standard completeness logic: it FAILS when no adversarial findings are present. This is the only exception to the standard validator PASS/FAIL rules in AIEOS. Absence of adversarial findings indicates incomplete review, not a clean system.
+
 ---
 
 ## 6. artifact promotion model
