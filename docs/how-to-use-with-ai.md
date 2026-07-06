@@ -14,7 +14,6 @@ This guide explains how to set up AI sessions for each step in the Operational D
 
 **DCR is human-authored.** Do not use AI to complete the DCR. Complete the template yourself from the Incident Intake Form.
 
-
 ## DCR. Human-Authored (No AI Generation Session)
 
 The DCR is human-authored. Do not use AI to complete it. Complete the template yourself using information from the incident evidence and the Incident Intake Form.
@@ -31,7 +30,6 @@ Use only the spec as the source of truth for pass/fail criteria.
 Do not suggest improvements. Judge only what is explicitly present.
 Output JSON using the format defined in docs/validators/dcr-validator.md."
 ```
-
 
 ## INR. Generation Session
 
@@ -110,7 +108,6 @@ Do not suggest improvements. Judge only what is explicitly present.
 Output JSON using the format defined in docs/validators/inr-validator.md."
 ```
 
-
 ## PMR. Generation Session
 
 **Session setup:**
@@ -153,7 +150,6 @@ Do not suggest improvements. Judge only what is explicitly present.
 Output JSON using the format defined in docs/validators/pmr-validator.md."
 ```
 
-
 ## RB. Generation Session
 
 **Session setup:**
@@ -193,7 +189,6 @@ Do not suggest improvements. Judge only what is explicitly present.
 Output JSON using the format defined in docs/validators/rb-validator.md."
 ```
 
-
 ## Utility Prompts
 
 ### DCR → SRP Consistency Check (after DCR, before INR)
@@ -208,7 +203,6 @@ Prompt:
 Compare the DCR service identification and symptoms against the SRP baseline.
 Output the consistency check assessment in the format defined in the prompt."
 ```
-
 
 ## Troubleshooting
 
