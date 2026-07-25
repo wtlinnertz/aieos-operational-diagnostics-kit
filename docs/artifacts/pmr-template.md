@@ -6,9 +6,10 @@
 
 | Field | Value |
 |-------|-------|
-| PMR ID | PMR-{SERVICE}-{NNN} |
+| Artifact ID | PMR-{SERVICE}-{NNN} |
+| Owner | {owner} |
 | Date | {YYYY-MM-DD} |
-| Status | Draft / Validated / Frozen |
+| Status | DRAFT |
 | Governance Model Version | 1.0 |
 | Prompt Version | {version of pmr-prompt.md used} |
 | Spec Version | {spec version} |

@@ -6,10 +6,11 @@
 
 | Field | Value |
 |-------|-------|
-| RB ID | RB-{SERVICE}-{NNN} |
+| Artifact ID | RB-{SERVICE}-{NNN} |
+| Owner | {owner} |
 | Version | v{N} |
 | Date | {YYYY-MM-DD} |
-| Status | Draft / Validated / Frozen |
+| Status | DRAFT |
 | Governance Model Version | 1.0 |
 | Prompt Version | {version of rb-prompt.md used} |
 | Spec Version | {spec version} |
