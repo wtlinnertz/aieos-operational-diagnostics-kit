@@ -6,9 +6,10 @@
 
 | Field | Value |
 |-------|-------|
-| INR ID | INR-{SERVICE}-{NNN} |
+| Artifact ID | INR-{SERVICE}-{NNN} |
+| Owner | {owner} |
 | Date and Time | {YYYY-MM-DD HH:MM UTC} |
-| Status | Draft / Validated / Frozen |
+| Status | DRAFT |
 | Governance Model Version | 1.0 |
 | Prompt Version | {version of inr-prompt.md used} |
 | Spec Version | {spec version} |

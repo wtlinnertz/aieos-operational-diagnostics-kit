@@ -6,11 +6,12 @@
 
 | Field | Value |
 |-------|-------|
-| DCR ID | DCR-{SERVICE}-{NNN} |
+| Artifact ID | DCR-{SERVICE}-{NNN} |
+| Owner | {owner} |
 | Date and Time | {YYYY-MM-DD HH:MM UTC} |
 | Severity | SEV1 / SEV2 / SEV3 / SEV4 |
 | Incident Owner | {named individual — not a team} |
-| Status | Draft / Validated / Frozen |
+| Status | DRAFT |
 | Governance Model Version | 1.0 |
 | Prompt Version | N/A |
 | Spec Version | {spec version} |
